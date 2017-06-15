@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.administrator.anzhuo_final.LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="账号："
+        android:layout_alignBottom="@+id/user"
+        android:layout_toLeftOf="@+id/user"
+        android:layout_toStartOf="@+id/user" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/passwd"
+        android:layout_alignStart="@+id/passwd"
+        android:layout_marginTop="92dp"
+        android:layout_alignRight="@+id/passwd"
+        android:layout_alignEnd="@+id/passwd" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密码："
+        android:layout_alignBottom="@+id/passwd"
+        android:layout_toLeftOf="@+id/passwd"
+        android:layout_toStartOf="@+id/passwd"
+        android:id="@+id/textView2" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwd"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/user"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        android:id="@+id/login"
+        android:layout_marginTop="47dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/register"
+        android:text="还没账号？注册一发："
+        android:layout_alignBottom="@+id/login"
+        android:layout_toRightOf="@+id/login"
+        android:layout_toEndOf="@+id/login" />
+
+</RelativeLayout>

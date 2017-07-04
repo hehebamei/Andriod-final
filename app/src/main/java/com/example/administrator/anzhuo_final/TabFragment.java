@@ -105,7 +105,7 @@ public class TabFragment extends Fragment {
         recyckerView.setLayoutManager(layoutManager);
         recyckerView.setHasFixedSize(true);
 
-        myAdapter=new MyListViewAdapter(list);
+        myAdapter=new MyListViewAdapter(list,getContext());
         recyckerView.setAdapter(myAdapter);
         myAdapter.setOnRecyclerViewListener(new MyListViewAdapter.OnRecyclerViewListener() {
             @Override
@@ -113,6 +113,7 @@ public class TabFragment extends Fragment {
                 Intent intent=new Intent(getActivity(),NewsContent.class);
                 intent.putExtra("Content",list.get(position).getContent());
                 intent.putExtra("Title",list.get(position).getTitle());
+                intent.putExtra("VideoUrl",list.get(position).getViUrl());
                 startActivity(intent);
             }
 
@@ -156,7 +157,7 @@ public class TabFragment extends Fragment {
         RequestQueue mQueue= Volley.newRequestQueue(getContext());
 
        // List<NewsObject> ls=new ArrayList<NewsObject>();
-        String url="http://192.168.43.156:8081/AndroidSever/getnews.php";
+        String url="http://192.168.0.11:8081/AndroidSever/getnews.php";
         StringRequest request = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
@@ -176,7 +177,9 @@ public class TabFragment extends Fragment {
                         //Log.e("tab", datatime);
                         String content=jsonObject.getString("Content");
                         int classid=jsonObject.getInt("Classid");
-                       news=new NewsObject(id,title,datatime,content,classid);
+                        String url=jsonObject.getString("ImageUrl");
+                        String vurl=jsonObject.getString("VideoUrl");
+                       news=new NewsObject(id,title,datatime,content,classid,url,vurl);
                         list.add(news);
 
                         //Log.e("tab", String.valueOf(list));

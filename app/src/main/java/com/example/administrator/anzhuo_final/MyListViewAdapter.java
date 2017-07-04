@@ -1,13 +1,21 @@
 package com.example.administrator.anzhuo_final;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -30,8 +38,9 @@ public class MyListViewAdapter extends RecyclerView.Adapter {
         this.onRecyclerViewListener = onRecyclerViewListener;
     }
     private static final String TAG = MyListViewAdapter.class.getSimpleName();
-    public MyListViewAdapter(ArrayList<NewsObject> list) {
+    public MyListViewAdapter(ArrayList<NewsObject> list,Context context) {
         this.list = list;
+        this.context=context;
     }
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.iteam,null);
@@ -42,11 +51,27 @@ public class MyListViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MyListViewHolder holder1=(MyListViewHolder) (holder);
+        final MyListViewHolder holder1=(MyListViewHolder) (holder);
         holder1.position=position;
         NewsObject newsObject=list.get(position);
         holder1.titleView.setText(newsObject.getTitle());
-
+        String url="http://192.168.0.11:8081/AndroidSever/images/";
+        url+=newsObject.getUrl();
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        ImageRequest imageRequest = new ImageRequest(
+                url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        holder1.imageView.setImageBitmap(response);
+                    }
+                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                holder1.imageView.setImageResource(R.mipmap.ic_launcher);
+            }
+        });
+        mQueue.add(imageRequest);
     }
 
     @Override
@@ -59,10 +84,12 @@ public class MyListViewAdapter extends RecyclerView.Adapter {
         public View rView;
         public TextView titleView;
         public int position;
+        public ImageView imageView;
 
         public MyListViewHolder(View itemView) {
             super(itemView);
             titleView=(TextView)itemView.findViewById(R.id.tv);
+            imageView=(ImageView)itemView.findViewById(R.id.iv);
             rView=itemView.findViewById(R.id.recycler_iteam);
             rView.setOnClickListener(this);
             rView.setOnLongClickListener(this);

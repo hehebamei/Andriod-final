@@ -17,11 +17,23 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView" />
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/scrollView"
-    android:layout_below="@+id/textView4">
+    android:layout_below="@+id/textView4"
+    android:fillViewport="false">
+
+</ScrollView>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +41,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/textView5"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/videoView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" /></ScrollView>
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/videoView"
+        android:layout_alignEnd="@+id/videoView" />
+
 </RelativeLayout>

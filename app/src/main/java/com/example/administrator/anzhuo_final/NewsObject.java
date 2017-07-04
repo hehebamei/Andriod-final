@@ -12,14 +12,18 @@ public class NewsObject implements Serializable {
     private int Id;
     private String Content;
     private int Classid;
+    private String Url;
+    private String ViUrl;
     //private List<>
-    public NewsObject(int id,String title,String dateTime,String content,int classid)
+    public NewsObject(int id,String title,String dateTime,String content,int classid,String url,String viUrl)
     {
         this.Id=id;
         this.Title=title;
         this.DateTime=dateTime;
         this.Content=content;
         this.Classid=classid;
+        this.Url=url;
+        this.ViUrl=viUrl;
     }
     public NewsObject(String title,String dateTime)
     {
@@ -43,7 +47,8 @@ public class NewsObject implements Serializable {
     {
         this.DateTime=dateTime;
     }
-
+    public String getUrl(){return Url;}
+    public String getViUrl(){return ViUrl;}
     public String getContent() {
         return Content;
     }
